@@ -4,7 +4,7 @@
 Via a Cloud Function, send a Slack webhook notification when a GCP Cloud Build successfully completes or fails via build-in Cloud Build Pub/Sub notifications.
 
 ## Overview
-Given a Pub/Sub topic called cloud-builds, the Cloud Build service account will automatically send messages to the topic with build status notifications. This Cloud Function watches the topic and sends slack notifications to Slack on successes and failtures.
+Given a Pub/Sub topic called cloud-builds, Cloud Build will automatically send build status notifications to the topic. The Cloud Function deployed here watches the topic and sends slack notifications to Slack on successes and failtures.
 
 ## Requirements
 * Cloud Functions, Secrets Manager, and Cloud Build APIs enabled
@@ -24,6 +24,8 @@ Given a Pub/Sub topic called cloud-builds, the Cloud Build service account will 
 ## Example Slack Notifications
 ![example-notifications](screenshot/example-notifications.png)
 
+## Notes
+* There are a lot of other details that you can pull out of the Pub/Sub message.  This is a basic example.  If you look at the Cloud Function logs, you'll see the full Pub/Sub json message.
+
 ## Troubleshooting
 * If the cloud-builds topic is not receiving Pub/Sub messages, disable and re-enable the Cloud Builds API after creating the topic.
-* In case you want to do extra filtering on the Pub/Sub message, the cloud function logs the json object to Google Cloud Logging.  Look at the Cloud Functions logs for a log like "Got {'name': 'projects/...."
