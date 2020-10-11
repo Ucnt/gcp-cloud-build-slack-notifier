@@ -5,8 +5,8 @@ Via a Cloud Function, send a Slack webhook notification when a GCP Cloud Build s
 
 ## Requirements
 * Cloud Functions, Secrets Manager, and Cloud Build APIs enabled
-* Service account with roles/secretmanager.secretAccessor.
-* cloud-builds Pub/Sub topic that Cloud Build is sending Pub/Sub messages to.
+* Service account with roles/secretmanager.secretAccessor
+* cloud-builds Pub/Sub topic that Cloud Build is sending Pub/Sub messages to (gcloud pubsub topics create cloud-builds)
 
 ## Deploy Cloud Function via bash script
 * Run: deploy_function.sh {PROJECT_ID} {SERVICE_ACCOUNT}
@@ -22,4 +22,4 @@ Via a Cloud Function, send a Slack webhook notification when a GCP Cloud Build s
 ![example-notifications](screenshot/example-notifications.png)
 
 ## Troubleshooting
-* If the cloud-builds topic is not receiving Pub/Sub messages, disable and re-enable the Cloud Builds API.
+* If the cloud-builds topic is not receiving Pub/Sub messages, disable and re-enable the Cloud Builds API after creating the topic.
