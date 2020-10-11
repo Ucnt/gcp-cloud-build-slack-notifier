@@ -18,17 +18,8 @@ Via a Cloud Function, send a Slack webhook notification when a GCP Cloud Build s
 4. Create a cloud build trigger for the repo
 5. Run the trigger to deploy the cloud function
 
-## Slack Notifications
-* Successful builds will get a message like this: 
-
-{REPO} build succeeded
-
-* Failed builds will get a message like this:
-
-{REPO} build FAILED
-Step #0:
-Command: gcr.io/cloud-builders/gcloud
-Arguments: [{ARGUMENTS}]
+## Example Slack Notifications
+[[/screenshot/example-notifications.png|alt=example-notifications]]
 
 ## Troubleshooting
 * If the cloud-builds topic is not receiving Pub/Sub messages, disable and re-enable the Cloud Builds API.
