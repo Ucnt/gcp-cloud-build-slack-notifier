@@ -1,0 +1,16 @@
+steps:
+##########################################################
+# Create/Update Cloud Function
+##########################################################
+- name: 'gcr.io/cloud-builders/gcloud'
+  args:
+  - functions
+  - deploy
+  - cloud-build-notifier
+  - --project=wedefendcharities
+  - --memory=256MB
+  - --runtime=python37
+  - --trigger-topic=cloud-builds
+  - --source=./source
+  - --entry-point=run_notifier
+  - --service-account=cloud-build-notifier@wedefendcharities.iam.gserviceaccount.com
