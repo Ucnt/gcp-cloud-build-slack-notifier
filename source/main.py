@@ -22,16 +22,21 @@ def run_notifier(event, context):
 
         print("Got {}".format(data_json))
 
-        # Parse fields
+        # Parse fields, some don't always exist
         log_url             = data_json['logUrl']
         status              = data_json['status']
         try:
-            repo_name           = data_json['source']['repoSource']['repoName']
-            commit_sha          = data_json['source']['repoSource']['commitSha']
+            repo_name       = data_json['source']['repoSource']['repoName']
         except:
             repo_name       = "unk"
+        try:
+            commit_sha      = data_json['source']['repoSource']['commitSha']
+        except:
             commit_sha      = "unk"
-        short_sha           = data_json['substitutions']['SHORT_SHA']
+        try:
+            short_sha       = data_json['substitutions']['SHORT_SHA']
+        except:
+            short_sha       = "unknown"
         build_trigger_id    = data_json['buildTriggerId']
 
         # Exit if not failed nor success
