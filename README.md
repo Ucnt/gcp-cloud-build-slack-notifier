@@ -1,7 +1,7 @@
 # GCP Cloud Build Slack Notifier
 
 ## Purpose
-Sends a Slack webhook notification when a GCP Cloud Build successfully comletes or fails via build-in Cloud Build Pub/Sub notifications.
+Sends a Slack webhook notification when a GCP Cloud Build successfully completes or fails via build-in Cloud Build Pub/Sub notifications.
 
 ## Requirements
 * Service account with roles/secretmanager.secretAccessor.
