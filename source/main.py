@@ -25,6 +25,7 @@ def run_notifier(event, context):
         # Parse fields, some don't always exist
         log_url             = data_json['logUrl']
         status              = data_json['status']
+        build_trigger_id    = data_json['buildTriggerId']
         try:
             repo_name       = data_json['source']['repoSource']['repoName']
         except:
@@ -37,7 +38,6 @@ def run_notifier(event, context):
             short_sha       = data_json['substitutions']['SHORT_SHA']
         except:
             short_sha       = "unknown"
-        build_trigger_id    = data_json['buildTriggerId']
 
         # Exit if not failed nor success
         if status not in ("SUCCESS", "FAILURE"):
