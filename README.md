@@ -16,9 +16,11 @@ Sends a Slack webhook notification when a GCP Cloud Build successfully comletes 
 
 ## Slack Notifications
 * Successful builds will get a message like this: 
+
 {REPO} build succeeded
 
 * Failed builds will get a message like this:
+
 {REPO} build FAILED
 Step #0:
 Command: gcr.io/cloud-builders/gcloud
