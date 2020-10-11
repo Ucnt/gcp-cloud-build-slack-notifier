@@ -19,7 +19,7 @@ Via a Cloud Function, send a Slack webhook notification when a GCP Cloud Build s
 5. Run the trigger to deploy the cloud function
 
 ## Example Slack Notifications
-[[/screenshot/example-notifications.png|alt=example-notifications]]
+[[screenshot/example-notifications.png|alt=example-notifications]]
 
 ## Troubleshooting
 * If the cloud-builds topic is not receiving Pub/Sub messages, disable and re-enable the Cloud Builds API.
