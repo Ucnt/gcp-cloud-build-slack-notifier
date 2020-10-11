@@ -23,3 +23,4 @@ Via a Cloud Function, send a Slack webhook notification when a GCP Cloud Build s
 
 ## Troubleshooting
 * If the cloud-builds topic is not receiving Pub/Sub messages, disable and re-enable the Cloud Builds API after creating the topic.
+* In case you want to do extra filtering on the Pub/Sub message, the cloud function logs the json object to Google Cloud Logging.  Look at the Cloud Functions logs for a log like "Got {'name': 'projects/...."
