@@ -37,13 +37,17 @@ def run_notifier(event, context):
         try:
             commit_sha          = data_json['source']['repoSource']['commitSha']
         except:
-            print("No sha found.  Exiting")
-            return
+            print("No sha found")
+            if status != "FAILURE":
+                print("Exiting")
+                return
         try:
             short_sha           = data_json['substitutions']['SHORT_SHA']
         except:
-            print("No short sha found.  Exiting")
-            return
+            print("No short sha found")
+            if status != "FAILURE":
+                print("Exiting")
+                return
 
         # Exit if not failed nor success
         if status not in ("SUCCESS", "FAILURE"):
