@@ -25,7 +25,10 @@ def run_notifier(event, context):
         # Parse fields, some don't always exist
         log_url             = data_json['logUrl']
         status              = data_json['status']
-        build_trigger_id    = data_json['buildTriggerId']
+        try:
+            build_trigger_id    = data_json['buildTriggerId']
+        except:
+            build_trigger_id    = "None"
         try:
             repo_name       = data_json['source']['repoSource']['repoName']
         except:
