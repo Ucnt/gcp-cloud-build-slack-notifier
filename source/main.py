@@ -104,11 +104,14 @@ def get_secret_manager_secret(PROJECT_ID, SECRET_ID):
 
 
 def get_failure_step(data_json):
-    for num, step in enumerate(data_json['steps']):
-        if step['status'] != "SUCCESS":
-            return '''Step #{}: 
-Command: {}
-Arguments: {}
-'''.format(num, step['name'], step['args'])
+    try:
+        for num, step in enumerate(data_json['steps']):
+            if step['status'] != "SUCCESS":
+                return '''Step #{}: 
+    Command: {}
+    Arguments: {}
+    '''.format(num, step['name'], step['args'])
 
-    return None
+        return None
+    except:
+        return "Failure before any steps occured"
