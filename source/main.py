@@ -30,17 +30,20 @@ def run_notifier(event, context):
         except:
             build_trigger_id    = "None"
         try:
-            repo_name       = data_json['source']['repoSource']['repoName']
+            repo_name           = data_json['source']['repoSource']['repoName']
         except:
-            repo_name       = "unk"
+            print("No repo name found.  Exiting")
+            return
         try:
-            commit_sha      = data_json['source']['repoSource']['commitSha']
+            commit_sha          = data_json['source']['repoSource']['commitSha']
         except:
-            commit_sha      = "unk"
+            print("No sha found.  Exiting")
+            return
         try:
-            short_sha       = data_json['substitutions']['SHORT_SHA']
+            short_sha           = data_json['substitutions']['SHORT_SHA']
         except:
-            short_sha       = "unknown"
+            print("No short sha found.  Exiting")
+            return
 
         # Exit if not failed nor success
         if status not in ("SUCCESS", "FAILURE"):
