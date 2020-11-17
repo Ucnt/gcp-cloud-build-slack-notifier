@@ -52,8 +52,8 @@ def run_notifier(event, context):
                 return
 
         # Exit if not failed nor success
-        if status not in ("SUCCESS", "FAILURE"):
-            print("Skipping...not a success or fail")
+        if status not in ("SUCCESS", "FAILURE", "TIMEOUT"):
+            print("Skipping...not a success, fail, or timeout")
             return
 
         # Make the initial message
@@ -62,6 +62,11 @@ def run_notifier(event, context):
             color   =  "#1a8f35"
         elif status == "FAILURE":
             text    = '''{} build FAILED
+{}
+'''.format(repo_name, get_failure_step(data_json=data_json))
+            color   =  "#cc361f"
+        elif status == "TIMEOUT":
+            text    = '''{} build TIMEDOUT
 {}
 '''.format(repo_name, get_failure_step(data_json=data_json))
             color   =  "#cc361f"
