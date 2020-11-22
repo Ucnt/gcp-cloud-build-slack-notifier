@@ -6,18 +6,26 @@ Via a Cloud Function, send a Slack webhook notification when a GCP Cloud Build s
 ## Overview
 Given a Pub/Sub topic called cloud-builds, Cloud Build will automatically send build status notifications to the topic. The Cloud Function deployed here watches the topic and sends slack notifications to Slack on successes and failtures.
 
-## Requirements
-* Cloud Functions, Secrets Manager, and Cloud Build APIs enabled
-* Service account with roles/secretmanager.secretAccessor
-* cloud-builds Pub/Sub topic that Cloud Build is sending Pub/Sub messages to (gcloud pubsub topics create cloud-builds)
+## Requirements if webhook URL is in the code
+* Existing Slack webhook URL and Cloud Build APIs and Cloud Functions enabled
+* cloud-builds Pub/Sub topic that Cloud Build is sending Pub/Sub messages to (to create topic: gcloud pubsub topics create cloud-builds)
 
-## Deploy Cloud Function via bash script
-* Run: deploy_function.sh {PROJECT_ID} {SERVICE_ACCOUNT}
+## Optional if webhook URL is in Secret Manager
+* Service account with roles/secretmanager.secretAccessor
+* Secret Manager secret with the webhook URL in it
+
+## Configuration
+* Replace your project ID in source/main.py in place of "{PROJECT_ID}"
+* (optional) Replace your secret manager secret ID in source/main.py in place of "{SECRET_ID}"
+* (optional) Insert your slack webhook url into source/main.py for the SLACK_WEBHOOK variable
+
+## Deploy Cloud Function via bash script, optional service account if using secret manager
+* Run: deploy_function.sh {PROJECT_ID} ({SERVICE_ACCOUNT})
 
 ## Deploy Cloud Function via Cloud Build trigger
-1. Modify the cloudbuild.yaml, putting your project ID in place of {PROJECT_ID} and service account in place of {SERVICE_ACCOUNT}
-2. Modify the source/main.py file, putting your project ID in place of {PROJECT_ID} and secret ID in place of {SECRET_ID}
-3. Add the code to a repo
+1. Modify the cloudbuild.yaml, putting your project ID in place of {PROJECT_ID} and service account in place of {SERVICE_ACCOUNT} (or delete that line if not using secret manager)
+* Documentation on the below steps: https://cloud.google.com/cloud-build/docs/automating-builds/create-manage-triggers
+2. Add the code to a repo that you control and connect it to Cloud Build
 4. Create a cloud build trigger for the repo
 5. Run the trigger to deploy the cloud function
 

@@ -7,6 +7,7 @@ from google.cloud import secretmanager
 import requests
 PROJECT_ID = "{PROJECT_ID}"
 SECRET_ID = "{SECRET_ID}"
+SLACK_WEBHOOK = ""
 
 
 ########################################################################################
@@ -94,7 +95,10 @@ def run_notifier(event, context):
 
 
 def send_slack_notification(attachments):
-    webhook_url = get_secret_manager_secret(PROJECT_ID=PROJECT_ID, SECRET_ID=SECRET_ID)
+    if SLACK_WEBHOOK:
+        webhook_url = SLACK_WEBHOOK
+    else:
+        webhook_url = get_secret_manager_secret(PROJECT_ID=PROJECT_ID, SECRET_ID=SECRET_ID)
     json_data = {"attachments" : attachments, "username":"cloud-build-status"}
     requests.post(webhook_url, data=json.dumps(json_data), verify=False, headers={'Content-Type': 'application/json'})
 
