@@ -67,7 +67,7 @@ def run_notifier(event, context):
 '''.format(repo_name, get_failure_step(data_json=data_json))
             color   =  "#cc361f"
         elif status == "TIMEOUT":
-            text    = '''{} build TIMEDOUT
+            text    = '''{} build TIMED OUT
 {}
 '''.format(repo_name, get_failure_step(data_json=data_json))
             color   =  "#cc361f"
