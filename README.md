@@ -19,8 +19,9 @@ Given a Pub/Sub topic called cloud-builds, Cloud Build will automatically send b
 * (optional) Replace your secret manager secret ID in source/main.py in place of "{SECRET_ID}"
 * (optional) Insert your slack webhook url into source/main.py for the SLACK_WEBHOOK variable
 
-## Deploy Cloud Function via bash script, optional service account if using secret manager
-* Run: deploy_function.sh {PROJECT_ID} ({SERVICE_ACCOUNT})
+## Deploy Cloud Function via bash script
+* With webhook in code: deploy_function.sh {PROJECT_ID}
+* With webhook in Secret Manager: deploy_function.sh {PROJECT_ID} {SERVICE_ACCOUNT}
 
 ## Deploy Cloud Function via Cloud Build trigger
 1. Modify the cloudbuild.yaml, putting your project ID in place of {PROJECT_ID} and service account in place of {SERVICE_ACCOUNT} (or delete that line if not using secret manager)
@@ -37,3 +38,4 @@ Given a Pub/Sub topic called cloud-builds, Cloud Build will automatically send b
 
 ## Troubleshooting
 * If the cloud-builds topic is not receiving Pub/Sub messages, disable and re-enable the Cloud Builds API after creating the topic.
+* If you see Pub/Sub messages going in but no notifications, check the Cloud Function logs.  Depending on where you get the bulid from, the fields may be different, e.g. lines 29-53 might need to be updated to point to the JSON location of the repo or SHA values.
