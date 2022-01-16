@@ -100,7 +100,7 @@ def send_slack_notification(attachments):
     else:
         webhook_url = get_secret_manager_secret(PROJECT_ID=PROJECT_ID, SECRET_ID=SECRET_ID)
     json_data = {"attachments" : attachments, "username":"cloud-build-status"}
-    requests.post(webhook_url, data=json.dumps(json_data), verify=False, headers={'Content-Type': 'application/json'})
+    requests.post(webhook_url, data=json.dumps(json_data), headers={'Content-Type': 'application/json'})
 
 
 def get_secret_manager_secret(PROJECT_ID, SECRET_ID):
